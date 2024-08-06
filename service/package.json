@@ -1,9 +1,9 @@
 {
-  "name": "chatgpt-web-sea-service",
+  "name": "chatgpt-web-service",
   "version": "1.0.1",
   "private": false,
   "description": "ChatGPT Web Service",
-  "author": "ershiyi <y170088888@163.com>",
+  "author": "MercryZz <zpjcetacean@gmail.com>",
   "keywords": [
     "chatgpt-web",
     "chatgpt",
@@ -17,6 +17,7 @@
     "start": "esno ./src/index.ts",
     "dev": "esno watch ./src/index.ts",
     "prod": "node ./build/index.mjs",
+    "build:netlify": "netlify-lambda build src",
     "build": "pnpm clean && tsup",
     "clean": "rimraf build",
     "lint": "eslint .",
@@ -47,6 +48,7 @@
     "@types/node": "^18.14.6",
     "eslint": "^8.35.0",
     "rimraf": "^4.3.0",
+    "serverless-http": "^3.2.0",
     "tsup": "^6.6.3",
     "typescript": "^4.9.5"
   }

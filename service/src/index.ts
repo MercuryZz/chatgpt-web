@@ -5,6 +5,8 @@ import multer from 'multer'
 import { limiter } from './middleware/limiter'
 import { isNotEmptyString } from './utils/is'
 import { chatService, getModelListForWeb, qiniuService } from './service'
+
+import serverless from 'serverless-http'
 dotenv.config()
 
 const app = express()
@@ -78,8 +80,17 @@ router.post('/upload', upload.single('file'), (req, res) => {
   return qiniuService(req, res)
 })
 
-app.use('', router)
-app.use('/api', router)
-app.set('trust proxy', 1)
+router.get('/ping', async (req, res) => {
+  res.send({ status: 'Success', message: 'pong', data: null })
+})
 
-app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+// app.use('', router)
+// app.use('/api', router)
+// app.set('trust proxy', 1)
+
+// app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+
+app.use('/.netlify/functions/api', router)
+
+module.exports = app
+module.exports.handler = serverless(app)
