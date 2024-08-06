@@ -1,0 +1,3 @@
+[build]
+  command = "cd service && pnpm install && pnpm build:netlify"
+  functions = "functions"
